@@ -49,12 +49,14 @@ void SocketIoClient::webSocketEvent(WStype_t type, uint8_t * payload, size_t len
 		case WStype_BIN:
 			SOCKETIOCLIENT_DEBUG("[SIoC] get binary length: %u\n", length);
 			hexdump((uint32_t*) payload, length);
-		break;
+			break;
+		default:
+			break;
 	}
 }
 
 void SocketIoClient::beginSSL(const char* host, const int port, const char* url, const char* fingerprint) {
-	_webSocket.beginSSL(host, port, url, fingerprint);
+	_webSocket.beginSSL(host, port, url, (const uint8_t*)fingerprint);
     initialize();
 }
 
